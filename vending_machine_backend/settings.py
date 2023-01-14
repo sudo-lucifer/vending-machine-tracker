@@ -93,6 +93,7 @@ WSGI_APPLICATION = 'vending_machine_backend.wsgi.application'
     Database set up
     See https://docs.djangoproject.com/en/2.2/ref/settings/#databases for more detail
 """
+USE_TZ = True
 DATABASES = {
     "default": {
         "ENGINE": os.getenv("DJANGO_DB_ENGINE", "django.db.backends.postgresql"),
