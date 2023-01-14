@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  vending-machine-postgres:
+    image: postgres:latest
+    container_name: vending-machine
+    environment:
+      - POSTGRES_PASSWORD=qwertyasdfg
+      - POSTGRES_DB=vending_machine
+      - POSTGRES_USER=vending_machine_manager
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./dbvolume:/var/lib/postgresql/data
