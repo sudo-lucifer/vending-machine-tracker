@@ -89,10 +89,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vending_machine_backend.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
+"""
+    Database set up
+    See https://docs.djangoproject.com/en/2.2/ref/settings/#databases for more detail
+"""
 DATABASES = {
     "default": {
         "ENGINE": os.getenv("DJANGO_DB_ENGINE", "django.db.backends.postgresql"),
