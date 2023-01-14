@@ -13,17 +13,20 @@ repos:
     rev: 22.3.0
     hooks:
       - id: black
-        # It is recommended to specify the latest version of Python
-        # supported by your project here, or alternatively use
-        # pre-commit's default_language_version, see
-        # https://pre-commit.com/#top_level-default_language_version
-        default_language_version:
-          python: python3.9
+        name: Black
   - repo: https://github.com/pycqa/isort
     rev: 5.6.4
     hooks:
       - id: isort
+        name: Sort imports alphabetically
   - repo: https://github.com/pycqa/flake8
     rev: 4.0.1
     hooks:
       - id: flake8
+        name: Check coding style (PEP8)
+# It is recommended to specify the latest version of Python
+# supported by your project here, or alternatively use
+# pre-commit's default_language_version, see
+# https://pre-commit.com/#top_level-default_language_version
+default_language_version:
+  python: python3.9
