@@ -1,0 +1,1 @@
+from vending_machine_management.models.vending_machine import VendingMachine

@@ -49,7 +49,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
 ]
 
-LOCAL_APPS = []
+LOCAL_APPS = ['vending_machine_management']
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -66,7 +66,7 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly']
+    # 'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly']
 }
 
 ROOT_URLCONF = 'vending_machine_backend.urls'
