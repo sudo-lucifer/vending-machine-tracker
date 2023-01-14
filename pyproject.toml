@@ -5,7 +5,7 @@ description = ""
 authors = ["sudo-lucifer <krittin.niu@student.mahidol.edu>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 django = "^2.2.7"
 djangorestframework = "^3.10.3"
 psycopg2-binary = "^2.9.5"
