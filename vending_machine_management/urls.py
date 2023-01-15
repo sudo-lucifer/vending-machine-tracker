@@ -16,6 +16,7 @@ Including another URLconf
 from django.urls import include, path
 
 from vending_machine_management.views.product.product_add_view import ProductAddView
+from vending_machine_management.views.product.product_delete_view import ProductDeleteView
 from vending_machine_management.views.product.product_edit_view import ProductEditView
 from vending_machine_management.views.product.product_list_view import ProductListView
 
@@ -26,7 +27,8 @@ vending_machine = []
 products = [
     path("list", ProductListView.as_view()),
     path("add", ProductAddView.as_view()),
-    path("edit/<int:product_id>", ProductEditView.as_view()),
+    path("delete/<int:id>", ProductDeleteView.as_view()),
+    path("edit/<int:id>", ProductEditView.as_view()),
 ]
 
 

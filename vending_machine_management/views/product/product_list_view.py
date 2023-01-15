@@ -1,7 +1,7 @@
 from rest_framework.generics import ListAPIView
 
 from vending_machine_management.models.product import Product
-from vending_machine_management.serializers.product.product_serializer import ProductSerializer
+from vending_machine_management.serializers.product_serializer import ProductSerializer
 
 """
     API to list all products available in the system

@@ -1,10 +1,11 @@
 from django.db import transaction
 from rest_framework.generics import CreateAPIView
 
-from vending_machine_management.serializers.product.product_serializer import ProductSerializer
+from vending_machine_management.serializers.product_serializer import ProductSerializer
 
 """
     API to add product into database
+    See https://www.django-rest-framework.org/api-guide/generic-views/#createapiview for more detail
     Request format:
     {
         name: string,
