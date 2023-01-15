@@ -13,8 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import include, path
+from django.urls import path
 
+from vending_machine_management.views.machine_view import MachineViewSet
 from vending_machine_management.views.product_view import ProductViewSet
 
 base_url_vending_machine = "vending-machine"
@@ -24,7 +25,25 @@ vending_machine = []
 
 
 urlpatterns = [
-    path(f"{base_url_vending_machine}/", include((vending_machine, "vending_machine"), namespace="vending_machine")),
+    path(
+        f"{base_url_vending_machine}/<int:id>",
+        MachineViewSet.as_view(
+            {
+                'get': 'retrieve',
+                'put': 'update',
+                'delete': 'destroy',
+            }
+        ),
+    ),
+    path(
+        f"{base_url_vending_machine}",
+        MachineViewSet.as_view(
+            {
+                'get': 'list',
+                'post': 'create',
+            }
+        ),
+    ),
     path(
         f"{base_url_product}/<int:id>",
         ProductViewSet.as_view(
