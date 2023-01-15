@@ -19,13 +19,17 @@ from vending_machine_management.views.machine_view import MachineViewSet
 from vending_machine_management.views.product_view import ProductViewSet
 from vending_machine_management.views.stock_view_set.stock_create_view import StockCreateView
 from vending_machine_management.views.stock_view_set.stock_delete_view import StockDeleteView
+from vending_machine_management.views.stock_view_set.stock_detail_view import StockDetailView
 from vending_machine_management.views.stock_view_set.stock_edit_view import StockEditView
+from vending_machine_management.views.stock_view_set.stock_list_view import StockListView
 
 base_url_vending_machine = "machine"
 base_url_stock = "stock"
 base_url_product = "product"
 
 stock = [
+    path("list", StockListView.as_view()),
+    path("detail/<int:id>", StockDetailView.as_view()),
     path("create", StockCreateView.as_view()),
     path("delete/<int:id>", StockDeleteView.as_view()),
     path("edit/<int:id>", StockEditView.as_view()),

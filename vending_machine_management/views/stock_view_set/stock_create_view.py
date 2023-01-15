@@ -1,4 +1,4 @@
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 from rest_framework import status
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
@@ -10,6 +10,7 @@ from vending_machine_management.serializers.stock.stock_serializer import StockS
 class StockCreateView(CreateAPIView):
     serializer_class = StockInputSerializer
 
+    @transaction.atomic
     def create(self, request, *args, **kwargs):
         input_serializer = self.serializer_class(data=request.data)
         input_serializer.is_valid(raise_exception=True)

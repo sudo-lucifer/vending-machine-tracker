@@ -11,7 +11,6 @@ from vending_machine_management.serializers.stock.stock_serializer import StockS
 class StockEditView(UpdateAPIView):
     queryset = Stock.objects.all()
     serializer_class = StockInputSerializer
-    http_method_names = ["put"]
     lookup_field = "id"
 
     @transaction.atomic
