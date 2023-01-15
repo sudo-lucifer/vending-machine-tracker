@@ -15,13 +15,17 @@ Including another URLconf
 """
 from django.urls import include, path
 
+from vending_machine_management.views.product.product_add_view import ProductAddView
 from vending_machine_management.views.product.product_list_view import ProductListView
 
 base_url_vending_machine = "vending-machine"
 base_url_product = "product"
 
 vending_machine = []
-products = [path("list", ProductListView.as_view())]
+products = [
+    path("list", ProductListView.as_view()),
+    path("add", ProductAddView.as_view()),
+]
 
 
 urlpatterns = [
