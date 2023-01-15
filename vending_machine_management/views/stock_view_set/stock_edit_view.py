@@ -7,6 +7,18 @@ from vending_machine_management.models.stock import Stock
 from vending_machine_management.serializers.stock.stock_input_serializer import StockInputSerializer
 from vending_machine_management.serializers.stock.stock_serializer import StockSerializer
 
+"""
+    API for edit stock given by Id
+
+    Request format:
+    {
+        machine: int (machine id),
+        product: int (product id),
+        amount: int (optional, default is 0)
+    }
+    See https://www.django-rest-framework.org/api-guide/generic-views/#updateapiview for more detail
+"""
+
 
 class StockEditView(UpdateAPIView):
     queryset = Stock.objects.all()

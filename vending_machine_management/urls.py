@@ -37,7 +37,7 @@ stock = [
 
 machine = [
     path(
-        f"<int:id>",
+        "<int:id>",
         MachineViewSet.as_view(
             {
                 'get': 'retrieve',
@@ -59,7 +59,7 @@ machine = [
 
 product = [
     path(
-        f"<int:id>",
+        "<int:id>",
         ProductViewSet.as_view(
             {
                 'get': 'retrieve',

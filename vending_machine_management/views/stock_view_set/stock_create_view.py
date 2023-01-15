@@ -6,6 +6,18 @@ from rest_framework.response import Response
 from vending_machine_management.serializers.stock.stock_input_serializer import StockInputSerializer
 from vending_machine_management.serializers.stock.stock_serializer import StockSerializer
 
+"""
+    API for add stock
+
+    Request format:
+    {
+        machine: int (machine id),
+        product: int (product id),
+        amount: int (optional, default is 0)
+    }
+    See https://www.django-rest-framework.org/api-guide/generic-views/#createapiview for more detail
+"""
+
 
 class StockCreateView(CreateAPIView):
     serializer_class = StockInputSerializer
