@@ -13,54 +13,71 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
+from django.urls import include, path
 
 from vending_machine_management.views.machine_view import MachineViewSet
 from vending_machine_management.views.product_view import ProductViewSet
+from vending_machine_management.views.stock_view_set.stock_create_view import StockCreateView
+from vending_machine_management.views.stock_view_set.stock_delete_view import StockDeleteView
+from vending_machine_management.views.stock_view_set.stock_edit_view import StockEditView
 
-base_url_vending_machine = "vending-machine"
+base_url_vending_machine = "machine"
+base_url_stock = "stock"
 base_url_product = "product"
 
-vending_machine = []
+stock = [
+    path("create", StockCreateView.as_view()),
+    path("delete/<int:id>", StockDeleteView.as_view()),
+    path("edit/<int:id>", StockEditView.as_view()),
+]
+
+machine = [
+    path(
+        f"<int:id>",
+        MachineViewSet.as_view(
+            {
+                'get': 'retrieve',
+                'put': 'update',
+                'delete': 'destroy',
+            }
+        ),
+    ),
+    path(
+        "",
+        MachineViewSet.as_view(
+            {
+                'get': 'list',
+                'post': 'create',
+            }
+        ),
+    ),
+]
+
+product = [
+    path(
+        f"<int:id>",
+        ProductViewSet.as_view(
+            {
+                'get': 'retrieve',
+                'put': 'update',
+                'delete': 'destroy',
+            }
+        ),
+    ),
+    path(
+        "",
+        ProductViewSet.as_view(
+            {
+                'get': 'list',
+                'post': 'create',
+            }
+        ),
+    ),
+]
 
 
 urlpatterns = [
-    path(
-        f"{base_url_vending_machine}/<int:id>",
-        MachineViewSet.as_view(
-            {
-                'get': 'retrieve',
-                'put': 'update',
-                'delete': 'destroy',
-            }
-        ),
-    ),
-    path(
-        f"{base_url_vending_machine}",
-        MachineViewSet.as_view(
-            {
-                'get': 'list',
-                'post': 'create',
-            }
-        ),
-    ),
-    path(
-        f"{base_url_product}/<int:id>",
-        ProductViewSet.as_view(
-            {
-                'get': 'retrieve',
-                'put': 'update',
-                'delete': 'destroy',
-            }
-        ),
-    ),
-    path(
-        f"{base_url_product}",
-        ProductViewSet.as_view(
-            {
-                'get': 'list',
-                'post': 'create',
-            }
-        ),
-    ),
+    path(f"{base_url_stock}/", include((stock, "stock"), namespace="stock")),
+    path(f"{base_url_vending_machine}/", include((machine, "vending_machine"), namespace="vending_machine")),
+    path(f"{base_url_product}/", include((product, "product"), namespace="product")),
 ]
