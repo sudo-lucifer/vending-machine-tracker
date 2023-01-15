@@ -15,24 +15,33 @@ Including another URLconf
 """
 from django.urls import include, path
 
-from vending_machine_management.views.product.product_add_view import ProductAddView
-from vending_machine_management.views.product.product_delete_view import ProductDeleteView
-from vending_machine_management.views.product.product_edit_view import ProductEditView
-from vending_machine_management.views.product.product_list_view import ProductListView
+from vending_machine_management.views.product_view import ProductViewSet
 
 base_url_vending_machine = "vending-machine"
 base_url_product = "product"
 
 vending_machine = []
-products = [
-    path("list", ProductListView.as_view()),
-    path("add", ProductAddView.as_view()),
-    path("delete/<int:id>", ProductDeleteView.as_view()),
-    path("edit/<int:id>", ProductEditView.as_view()),
-]
 
 
 urlpatterns = [
     path(f"{base_url_vending_machine}/", include((vending_machine, "vending_machine"), namespace="vending_machine")),
-    path(f"{base_url_product}/", include((products, "product"), namespace="product")),
+    path(
+        f"{base_url_product}/<int:id>",
+        ProductViewSet.as_view(
+            {
+                'get': 'retrieve',
+                'put': 'update',
+                'delete': 'destroy',
+            }
+        ),
+    ),
+    path(
+        f"{base_url_product}",
+        ProductViewSet.as_view(
+            {
+                'get': 'list',
+                'post': 'create',
+            }
+        ),
+    ),
 ]
