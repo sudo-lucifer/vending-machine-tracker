@@ -3,7 +3,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+    rev: v4.4.0
     hooks:
       -   id: trailing-whitespace
       -   id: end-of-file-fixer
@@ -15,12 +15,12 @@ repos:
       - id: black
         name: Black
   - repo: https://github.com/pycqa/isort
-    rev: 5.6.4
+    rev: 5.11.4
     hooks:
       - id: isort
         name: Sort imports alphabetically
   - repo: https://github.com/pycqa/flake8
-    rev: 4.0.1
+    rev: 6.0.0
     hooks:
       - id: flake8
         name: Check coding style (PEP8)
