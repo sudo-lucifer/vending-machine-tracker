@@ -11,7 +11,7 @@ from vending_machine_management.serializers.product_serializer import ProductSer
         3. Delete product (given product id in url)
         4. List all products
         5. Get single product detail (given product id in url)
-    Request format for put and post requests:
+    Request format for put (edit product) and post (create product) requests:
         {
             name: string,
             price: decimal number (optional)

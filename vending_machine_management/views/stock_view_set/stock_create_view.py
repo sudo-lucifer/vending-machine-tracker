@@ -8,7 +8,6 @@ from vending_machine_management.serializers.stock.stock_serializer import StockS
 
 """
     API for add stock
-
     Request format:
     {
         machine: int (machine id),

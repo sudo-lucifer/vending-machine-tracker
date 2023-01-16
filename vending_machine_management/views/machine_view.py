@@ -11,7 +11,7 @@ from vending_machine_management.serializers.machine_serializer import MachineSer
         3. Delete machine (given product id in url)
         4. List all machine
         5. Get single machine detail (given product id in url)
-    Request format for put and post requests:
+    Request format for put (edit machine) and post (create machine) requests:
         {
             name: string,
             location: string

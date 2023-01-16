@@ -9,7 +9,6 @@ from vending_machine_management.serializers.stock.stock_serializer import StockS
 
 """
     API for edit stock given by Id
-
     Request format:
     {
         machine: int (machine id),
