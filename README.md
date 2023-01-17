@@ -2,12 +2,12 @@
 
 ### Requirement
 <ul>
-    <li>Poetry version > 1.0.0</li>
-    <li>pre-commit</li>
-    <li>docker</li>
+    <li>Poetry version > 1.0.0 for virtual environment</li>
+    <li>pre-commit for linting before pushing to repository</li>
+    <li>docker for postgresSQL database</li>
 </ul>
 
-### Set up `pre-commit`
+### Set up `pre-commit` for linting
 1. Install pre-commit ``pip install pre-commit``
 2. Run ``pre-commit install``
 

@@ -47,7 +47,7 @@ machine = [
         ),
     ),
     path(
-        "",
+        "list-create",
         MachineViewSet.as_view(
             {
                 'get': 'list',
@@ -69,7 +69,7 @@ product = [
         ),
     ),
     path(
-        "",
+        "list-create",
         ProductViewSet.as_view(
             {
                 'get': 'list',
