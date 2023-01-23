@@ -46,3 +46,8 @@ class TestEditMachineView(APITestCase):
         response = self.client.put(self.url, data=request_body)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_add_machine_not_found(self):
+        url = reverse("vending_machine:retrieve-update-destroy", kwargs={"id": self.machine_2.id + 1})
+        response = self.client.put(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
