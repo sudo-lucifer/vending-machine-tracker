@@ -10,12 +10,12 @@ class TestDeleteProductView(APITestCase):
     def setUpTestData(cls):
         cls.product_1 = product_instance.make()
 
-    def test_delete_single_machine(self):
+    def test_delete_single_product(self):
         url = reverse("product:retrieve-update-destroy", kwargs={"id": self.product_1.id})
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_delete_single_machine_not_found(self):
+    def test_delete_single_product_not_found(self):
         url = reverse("product:retrieve-update-destroy", kwargs={"id": self.product_1.id + 1})
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
