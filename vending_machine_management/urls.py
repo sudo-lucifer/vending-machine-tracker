@@ -28,11 +28,11 @@ base_url_stock = "stock"
 base_url_product = "product"
 
 stock = [
-    path("list", StockListView.as_view()),
-    path("detail/<int:id>", StockDetailView.as_view()),
-    path("create", StockCreateView.as_view()),
-    path("delete/<int:id>", StockDeleteView.as_view()),
-    path("edit/<int:id>", StockEditView.as_view()),
+    path("list", StockListView.as_view(), name="list"),
+    path("detail/<int:id>", StockDetailView.as_view(), name='detail'),
+    path("create", StockCreateView.as_view(), name='create'),
+    path("delete/<int:id>", StockDeleteView.as_view(), name='delete'),
+    path("edit/<int:id>", StockEditView.as_view(), name='edit'),
 ]
 
 machine = [
@@ -45,6 +45,7 @@ machine = [
                 'delete': 'destroy',
             }
         ),
+        name='retrieve-update-destroy',
     ),
     path(
         "list-create",
@@ -54,6 +55,7 @@ machine = [
                 'post': 'create',
             }
         ),
+        name='list-create',
     ),
 ]
 
@@ -67,6 +69,7 @@ product = [
                 'delete': 'destroy',
             }
         ),
+        name='retrieve-update-destroy',
     ),
     path(
         "list-create",
@@ -76,6 +79,7 @@ product = [
                 'post': 'create',
             }
         ),
+        name='list-create',
     ),
 ]
 
