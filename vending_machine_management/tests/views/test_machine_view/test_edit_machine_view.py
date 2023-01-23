@@ -29,7 +29,7 @@ class TestEditMachineView(APITestCase):
         response = self.client.put(self.url, data=request_body)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_add_machine_correct_input(self):
+    def test_edit_machine_correct_input(self):
         new_machine_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=100))
         request_body: Dict[str, str] = {"name": new_machine_name, "location": self.machine_1.location}
 
@@ -40,14 +40,14 @@ class TestEditMachineView(APITestCase):
         self.assertEqual(response.data['name'], request_body['name'])
         self.assertEqual(response.data['location'], request_body['location'])
 
-    def test_add_machine_duplicate_name(self):
+    def test_edit_machine_duplicate_name(self):
         request_body: Dict[str, str] = {"name": self.machine_2.name, "location": self.machine_1.location}
 
         response = self.client.put(self.url, data=request_body)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_add_machine_not_found(self):
+    def test_edit_machine_not_found(self):
         url = reverse("vending_machine:retrieve-update-destroy", kwargs={"id": self.machine_2.id + 1})
         response = self.client.put(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
