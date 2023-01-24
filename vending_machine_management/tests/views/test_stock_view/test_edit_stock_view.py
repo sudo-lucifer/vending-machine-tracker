@@ -51,7 +51,7 @@ class TestEditStockView(APITestCase):
         self.assertEqual(response_product, expected_product)
         self.assertEqual(response_machine, expected_machine)
 
-    def test_add_stock_duplicate_machine_or_product(self):
+    def test_edit_stock_duplicate_machine_or_product(self):
         request_body: Dict[str, int] = {"machine": self.stock_2.machine.id, "product": self.stock_2.product.id}
         response = self.client.put(self.url, data=request_body)
         self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
