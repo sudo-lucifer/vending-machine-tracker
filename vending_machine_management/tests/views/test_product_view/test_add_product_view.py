@@ -6,13 +6,14 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from vending_machine_management.models.product import Product
 from vending_machine_management.tests.model_instances.product_model_inatance import product_instance
 
 
 class TestAddProductView(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.product_1 = product_instance.make()
+        cls.product_1: Product = product_instance.make()
         cls.url = reverse("product:list-create")
 
     def test_add_product_invalid_input(self):

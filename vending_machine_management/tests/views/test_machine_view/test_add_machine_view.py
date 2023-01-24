@@ -4,14 +4,15 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from vending_machine_management.models.machine import Machine
 from vending_machine_management.tests.model_instances.machine_model_instance import machine_instance
 
 
 class TestAddMachineView(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.machine_1 = machine_instance.make()
-        cls.location = "Location 1"
+        cls.machine_1: Machine = machine_instance.make()
+        cls.location: str = "Location 1"
         cls.url = reverse("vending_machine:list-create")
 
     def test_add_machine_invalid_input(self):

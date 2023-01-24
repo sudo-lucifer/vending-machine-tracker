@@ -7,6 +7,9 @@ from rest_framework.test import APITestCase
 
 from vending_machine_management.dataclasses.machine_dataclass import MachineDataclass
 from vending_machine_management.dataclasses.product_dataclass import ProductDataclass
+from vending_machine_management.models.machine import Machine
+from vending_machine_management.models.product import Product
+from vending_machine_management.models.stock import Stock
 from vending_machine_management.serializers.machine_serializer import MachineSerializer
 from vending_machine_management.serializers.product_serializer import ProductSerializer
 from vending_machine_management.tests.model_instances.machine_model_instance import machine_instance
@@ -17,11 +20,11 @@ from vending_machine_management.tests.model_instances.stock_mode_instance import
 class TestAddStockView(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        product_2 = product_instance.make()
-        machine_2 = machine_instance.make()
-        cls.product_1 = product_instance.make()
-        cls.machine_1 = machine_instance.make()
-        cls.stock = stock_instance.make(product=product_2, machine=machine_2)
+        product_2: Product = product_instance.make()
+        machine_2: Machine = machine_instance.make()
+        cls.product_1: Product = product_instance.make()
+        cls.machine_1: Machine = machine_instance.make()
+        cls.stock: Stock = stock_instance.make(product=product_2, machine=machine_2)
         cls.url = reverse("stock:create")
 
     def test_add_stock_invalid_input(self):

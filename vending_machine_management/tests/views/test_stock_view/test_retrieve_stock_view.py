@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from vending_machine_management.dataclasses.stock_dataclass import StockDataclass
+from vending_machine_management.models.stock import Stock
 from vending_machine_management.serializers.stock.stock_serializer import StockSerializer
 from vending_machine_management.tests.model_instances.stock_mode_instance import stock_instance
 
@@ -12,7 +13,7 @@ from vending_machine_management.tests.model_instances.stock_mode_instance import
 class TestRetrieveStockView(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.stock = stock_instance.make()
+        cls.stock: Stock = stock_instance.make()
 
     def test_retrieve_single_stock(self):
         url = reverse("stock:detail", kwargs={"id": self.stock.id})

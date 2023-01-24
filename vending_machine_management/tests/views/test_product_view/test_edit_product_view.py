@@ -6,15 +6,16 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from vending_machine_management.models.product import Product
 from vending_machine_management.tests.model_instances.product_model_inatance import product_instance
 
 
 class TestEditProductView(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        product_1 = product_instance.make()
-        cls.product_1 = product_1
-        cls.product_2 = product_instance.make()
+        product_1: Product = product_instance.make()
+        cls.product_1: Product = product_1
+        cls.product_2: Product = product_instance.make()
         cls.url = reverse("product:retrieve-update-destroy", kwargs={"id": product_1.id})
 
     def test_edit_product_invalid_input(self):
