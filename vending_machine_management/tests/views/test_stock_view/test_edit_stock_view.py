@@ -5,6 +5,8 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from vending_machine_management.dataclasses.machine_dataclass import MachineDataclass
+from vending_machine_management.dataclasses.product_dataclass import ProductDataclass
 from vending_machine_management.serializers.machine_serializer import MachineSerializer
 from vending_machine_management.serializers.product_serializer import ProductSerializer
 from vending_machine_management.tests.model_instances.machine_model_instance import machine_instance
@@ -41,10 +43,10 @@ class TestEditStockView(APITestCase):
 
         response = self.client.put(self.url, data=request_body)
 
-        response_machine: Dict[str, str] = json.loads(json.dumps(response.data['machine']))
-        response_product: Dict[str, str] = json.loads(json.dumps(response.data['product']))
-        expected_product: Dict[str, str] = ProductSerializer(self.product_1).data
-        expected_machine: Dict[str, str] = MachineSerializer(self.machine_1).data
+        response_machine: MachineDataclass = json.loads(json.dumps(response.data['machine']))
+        response_product: ProductDataclass = json.loads(json.dumps(response.data['product']))
+        expected_product: ProductDataclass = ProductSerializer(self.product_1).data
+        expected_machine: MachineDataclass = MachineSerializer(self.machine_1).data
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(int(response.data["id"]), self.stock_1.id)
         self.assertEqual(int(response.data["amount"]), 100)

@@ -30,7 +30,7 @@ class TestEditMachineView(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_edit_machine_correct_input(self):
-        new_machine_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=100))
+        new_machine_name: str = ''.join(random.choices(string.ascii_uppercase + string.digits, k=100))
         request_body: Dict[str, str] = {"name": new_machine_name, "location": self.machine_1.location}
 
         response = self.client.put(self.url, data=request_body)
@@ -42,9 +42,7 @@ class TestEditMachineView(APITestCase):
 
     def test_edit_machine_duplicate_name(self):
         request_body: Dict[str, str] = {"name": self.machine_2.name, "location": self.machine_1.location}
-
         response = self.client.put(self.url, data=request_body)
-
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_edit_machine_not_found(self):

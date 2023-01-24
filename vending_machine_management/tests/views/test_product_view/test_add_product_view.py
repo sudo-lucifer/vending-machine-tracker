@@ -20,7 +20,7 @@ class TestAddProductView(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_add_product_correct_input(self):
-        new_product_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=100))
+        new_product_name: str = ''.join(random.choices(string.ascii_uppercase + string.digits, k=100))
         request_body: Dict[str, str] = {"name": new_product_name}
         response = self.client.post(self.url, data=request_body)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

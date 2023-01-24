@@ -1,10 +1,9 @@
-from typing import Any, Dict
-
 from django.db import IntegrityError, transaction
 from rest_framework import status
 from rest_framework.generics import UpdateAPIView
 from rest_framework.response import Response
 
+from vending_machine_management.dataclasses.stock_dataclass import StockDataclass
 from vending_machine_management.models.stock import Stock
 from vending_machine_management.serializers.stock.stock_input_serializer import StockInputSerializer
 from vending_machine_management.serializers.stock.stock_serializer import StockSerializer
@@ -45,5 +44,5 @@ class StockEditView(UpdateAPIView):
             selected_stock._prefetched_objects_cache = {}
 
         output_serializer: StockSerializer = StockSerializer(output)
-        response_data: Dict[str, Any] = output_serializer.data
+        response_data: StockDataclass = output_serializer.data
         return Response(response_data, status=status.HTTP_200_OK)
