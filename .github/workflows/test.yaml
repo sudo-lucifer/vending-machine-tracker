@@ -55,7 +55,6 @@ jobs:
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
-
       - name: Download coverage report artifact
         uses: actions/download-artifact@v3
         with:
