@@ -1,3 +1,4 @@
+import secrets
 from typing import Dict
 
 from django.urls import reverse
@@ -28,7 +29,8 @@ class TestAddMachineView(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_add_machine_correct_input(self):
-        request_body: Dict[str, str] = {"name": "Test 1", "location": self.location}
+        new_machine_name: str = secrets.token_hex(16)
+        request_body: Dict[str, str] = {"name": new_machine_name, "location": self.location}
         response = self.client.post(self.url, data=request_body)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['name'], request_body['name'])

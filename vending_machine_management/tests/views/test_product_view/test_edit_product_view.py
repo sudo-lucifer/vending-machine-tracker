@@ -1,5 +1,4 @@
-import random
-import string
+import secrets
 from typing import Dict
 
 from django.urls import reverse
@@ -23,7 +22,7 @@ class TestEditProductView(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_edit_product_correct_input(self):
-        new_product_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=100))
+        new_product_name = secrets.token_hex(16)
         request_body: Dict[str, str] = {"name": new_product_name}
         response = self.client.put(self.url, data=request_body)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -31,7 +30,7 @@ class TestEditProductView(APITestCase):
         self.assertEqual(response.data['name'], request_body['name'])
         self.assertEqual(float(response.data['price']), 0)
 
-        new_product_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=100))
+        new_product_name = secrets.token_hex(16)
         request_body: Dict[str, str] = {"name": new_product_name, "price": 60}
         response = self.client.put(self.url, data=request_body)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
