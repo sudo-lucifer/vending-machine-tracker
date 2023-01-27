@@ -37,7 +37,6 @@ class TestEditMachineView(APITestCase):
         request_body: Dict[str, str] = {"name": new_machine_name, "location": self.machine_1.location}
 
         response = self.client.put(self.url, data=request_body)
-        print(test)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['id'], self.machine_1.id)
