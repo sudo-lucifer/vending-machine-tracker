@@ -56,6 +56,17 @@ class TestEditStockView(APITestCase):
         self.assertEqual(response_product, expected_product)
         self.assertEqual(response_machine, expected_machine)
 
+    def test_partially_edit_stock_correct_input(self):
+        request_body: Dict[str, int] = {"product": self.product_1.id}
+
+        response = self.client.patch(self.url, data=request_body)
+
+        expected_product: ProductDataclass = ProductSerializer(self.product_1).data
+        response_product: ProductDataclass = json.loads(json.dumps(response.data['product']))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(int(response.data["id"]), self.stock_1.id)
+        self.assertEqual(response_product, expected_product)
+
     def test_edit_stock_duplicate_machine_or_product(self):
         request_body: Dict[str, int] = {"machine": self.stock_2.machine.id, "product": self.stock_2.product.id}
         response = self.client.put(self.url, data=request_body)

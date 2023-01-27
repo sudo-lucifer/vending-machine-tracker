@@ -47,11 +47,6 @@ class StockEditView(UpdateAPIView):
                 data={"detail": "Product already exists in this machine"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
-        if getattr(selected_stock, '_prefetched_objects_cache', None):
-            # If 'prefetch_related' has been applied to a queryset, we need to
-            # forcibly invalidate the prefetch cache on the instance.
-            selected_stock._prefetched_objects_cache = {}
-
         output_serializer: StockSerializer = StockSerializer(output)
         response_data: StockDataclass = output_serializer.data
         return Response(response_data, status=status.HTTP_200_OK)
