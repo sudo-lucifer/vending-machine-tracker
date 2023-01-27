@@ -1,5 +1,4 @@
-import random
-import string
+import secrets
 from typing import Dict
 
 from django.urls import reverse
@@ -31,7 +30,7 @@ class TestEditMachineView(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_edit_machine_correct_input(self):
-        new_machine_name: str = ''.join(random.choices(string.ascii_uppercase + string.digits, k=100))
+        new_machine_name: str = secrets.token_hex(16)
         request_body: Dict[str, str] = {"name": new_machine_name, "location": self.machine_1.location}
 
         response = self.client.put(self.url, data=request_body)

@@ -3,8 +3,17 @@ from rest_framework import mixins, viewsets
 from vending_machine_management.models.product import Product
 from vending_machine_management.serializers.product_serializer import ProductSerializer
 
-"""
-    API View set for product
+
+class ProductViewSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
+    """API View set for product.
+
     Functionality:
         1. Add product
         2. Edit product (given product id in url)
@@ -19,17 +28,8 @@ from vending_machine_management.serializers.product_serializer import ProductSer
     See https://www.django-rest-framework.org/api-guide/generic-views/#generic-views for more detail
     Remark: this is default by django. You can overwrite function for more complex API functionality i.e filtering,
     pagination result
-"""
+    """
 
-
-class ProductViewSet(
-    mixins.ListModelMixin,
-    mixins.CreateModelMixin,
-    mixins.UpdateModelMixin,
-    mixins.DestroyModelMixin,
-    mixins.RetrieveModelMixin,
-    viewsets.GenericViewSet,
-):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     http_method_names = ["get", "post", "put", "delete"]

@@ -1,3 +1,6 @@
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sudo-lucifer_vending-machine-tracker&metric=coverage)](https://sonarcloud.io/summary/new_code?id=sudo-lucifer_vending-machine-tracker)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=sudo-lucifer_vending-machine-tracker&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=sudo-lucifer_vending-machine-tracker)
+
 ## Vending Machine Tracking Application
 
 ### Project structure
