@@ -170,3 +170,4 @@ cython_debug/
 dbvolume/
 .DS_Store
 .pytest_cache
+cov_html
