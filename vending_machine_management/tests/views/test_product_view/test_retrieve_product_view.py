@@ -11,11 +11,18 @@ from vending_machine_management.tests.model_instances.product_model_inatance imp
 
 
 class TestRetrieveProductView(APITestCase):
+    """Test class for getting one product detail."""
+
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
+        """Test hook to mock product instance in database.
+
+        :return: None
+        """
         cls.product_1: Product = product_instance.make()
 
-    def test_retrieve_single_product(self):
+    def test_retrieve_single_product(self) -> None:
+        """Test getting one existing product detail."""
         url = reverse("product:retrieve-update-destroy", kwargs={"id": self.product_1.id})
         response = self.client.get(url)
 
@@ -25,6 +32,7 @@ class TestRetrieveProductView(APITestCase):
         self.assertEqual(expected_result, response_data)
 
     def test_retrieve_single_product_not_found(self):
+        """Test getting non-existing product detail."""
         url = reverse("product:retrieve-update-destroy", kwargs={"id": self.product_1.id + 1})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

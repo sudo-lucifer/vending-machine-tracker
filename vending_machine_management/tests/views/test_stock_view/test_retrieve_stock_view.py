@@ -11,11 +11,18 @@ from vending_machine_management.tests.model_instances.stock_mode_instance import
 
 
 class TestRetrieveStockView(APITestCase):
+    """Test class for getting one stock detail."""
+
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
+        """Test class for mocking stock instance to database.
+
+        :return:
+        """
         cls.stock: Stock = stock_instance.make()
 
-    def test_retrieve_single_stock(self):
+    def test_retrieve_single_stock(self) -> None:
+        """Test getting one existing stock detail."""
         url = reverse("stock:detail", kwargs={"id": self.stock.id})
         response = self.client.get(url)
 
@@ -25,6 +32,7 @@ class TestRetrieveStockView(APITestCase):
         self.assertEqual(expected_result, response_data)
 
     def test_retrieve_single_stock_not_found(self):
+        """Test getting non-existing stock detail."""
         url = reverse("stock:detail", kwargs={"id": self.stock.id + 1})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

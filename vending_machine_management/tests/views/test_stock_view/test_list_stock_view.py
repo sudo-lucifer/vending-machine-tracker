@@ -12,12 +12,19 @@ from vending_machine_management.tests.model_instances.stock_mode_instance import
 
 
 class TestListStockView(APITestCase):
+    """Test class for listing all stocks in database."""
+
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
+        """Test hook for mocking 2 stock instances to database.
+
+        :return:
+        """
         cls.stock_1: Stock = stock_instance.make()
         cls.stock_2: Stock = stock_instance.make()
 
-    def test_list_stock(self):
+    def test_list_stock(self) -> None:
+        """Test listing all stocks."""
         url = reverse("stock:list")
         response = self.client.get(url)
 

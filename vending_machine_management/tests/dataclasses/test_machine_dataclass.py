@@ -7,11 +7,18 @@ from vending_machine_management.tests.model_instances.machine_model_instance imp
 
 
 class TestMachineDataclass(TestCase):
+    """Test class for machine dataclass with machine query instance."""
+
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
+        """Test hook to mock machine instance in database.
+
+        :return: None
+        """
         cls.machine: Machine = machine_instance.make()
 
-    def test_machine_dataclass_from_model(self):
+    def test_machine_dataclass_from_model(self) -> None:
+        """Test from_model() to return the dataclass version of machine query instance."""
         expected_result: MachineDataclass = MachineSerializer(self.machine).data
         dataclass_result_from_model: MachineDataclass = MachineDataclass.from_model(
             machine_instance=self.machine

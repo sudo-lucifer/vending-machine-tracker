@@ -7,11 +7,18 @@ from vending_machine_management.tests.model_instances.product_model_inatance imp
 
 
 class TestProductDataclass(TestCase):
+    """Test class for product dataclass with product query instance."""
+
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
+        """Test hook to mock product instance in database.
+
+        :return: None
+        """
         cls.product: Product = product_instance.make()
 
-    def test_product_dataclass_from_model(self):
+    def test_product_dataclass_from_model(self) -> None:
+        """Test from_model() to return the dataclass version of product query instance."""
         expected_result: ProductDataclass = ProductSerializer(self.product).data
         dataclass_result_from_model: ProductDataclass = ProductDataclass.from_model(
             product_instance=self.product
