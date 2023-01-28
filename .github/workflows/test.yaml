@@ -11,6 +11,21 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    services:
+      postgres-test-service:
+        image: postgres
+        env:
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
@@ -38,7 +53,9 @@ jobs:
         run: |
           poetry run pytest
         env:
-          DJANGO_DB_ENGINE: django.db.backends.sqlite3
+          DJANGO_DB_NAME: ${{ secrets.POSTGRES_DB }}
+          DJANGO_DB_USER: ${{ secrets.POSTGRES_USER }}
+          DJANGO_DB_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       - name: Upload coverage report artifact
         uses: actions/upload-artifact@v3
         with:
