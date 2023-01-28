@@ -12,13 +12,20 @@ from vending_machine_management.tests.model_instances.machine_model_instance imp
 
 
 class TestListMachineView(APITestCase):
+    """Test class for listing all machines in database."""
+
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
+        """Test hook to mock 2 machine instances in database.
+
+        :return: None
+        """
         cls.machine_1: Machine = machine_instance.make()
         cls.machine_2: Machine = machine_instance.make()
         cls.url = reverse("vending_machine:list-create")
 
-    def test_list_machine(self):
+    def test_list_machine(self) -> None:
+        """Test listing all machines."""
         response = self.client.get(self.url)
 
         expected_result: List[MachineDataclass] = [

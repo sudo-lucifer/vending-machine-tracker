@@ -8,11 +8,18 @@ from vending_machine_management.tests.model_instances.stock_mode_instance import
 
 
 class TestStockDataclass(TestCase):
+    """Test class for stock dataclass with stock query instance."""
+
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
+        """Test hook to mock stock instance in database.
+
+        :return: None
+        """
         cls.stock: Stock = stock_instance.make()
 
-    def test_stock_dataclass_from_model(self):
+    def test_stock_dataclass_from_model(self) -> None:
+        """Test from_model() to return the dataclass version of stock query instance."""
         expected_result: StockDataclass = StockDataclass(
             id=self.stock.id,
             machine=MachineDataclass.from_model(machine_instance=self.stock.machine),

@@ -12,12 +12,19 @@ from vending_machine_management.tests.model_instances.product_model_inatance imp
 
 
 class TestListProductView(APITestCase):
+    """Test class for listing all product in database."""
+
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
+        """Test hook to 2 mock product instances in database.
+
+        :return: None
+        """
         cls.product_1: Product = product_instance.make()
         cls.product_2: Product = product_instance.make()
 
-    def test_list_product(self):
+    def test_list_product(self) -> None:
+        """Test listing all products in database."""
         url = reverse("product:list-create")
 
         response = self.client.get(url)

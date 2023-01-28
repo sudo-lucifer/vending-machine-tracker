@@ -18,18 +18,23 @@ from vending_machine_management.tests.model_instances.stock_mode_instance import
 
 
 class TestEditStockView(APITestCase):
+    """Test class for editing one stock."""
+
     @classmethod
-    def setUpTestData(cls):
-        product_2: Product = product_instance.make()
-        machine_2: Machine = machine_instance.make()
-        stock_1: Stock = stock_instance.make(product=product_2, machine=machine_2)
+    def setUpTestData(cls) -> None:
+        """Test hook for mocking 2 stocks instances (one for editing, another for testing duplicate).
+
+        :return: None
+        """
+        stock_1: Stock = stock_instance.make()
         cls.product_1: Product = product_instance.make()
         cls.machine_1: Machine = machine_instance.make()
         cls.stock_1: Stock = stock_1
         cls.stock_2: Stock = stock_instance.make()
         cls.url = reverse("stock:edit", kwargs={"id": stock_1.id})
 
-    def test_edit_stock_invalid_input(self):
+    def test_edit_stock_invalid_input(self) -> None:
+        """Test put request method for editing stock with invalid input (missing machine or product key)."""
         response = self.client.put(self.url)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
@@ -41,7 +46,8 @@ class TestEditStockView(APITestCase):
         response = self.client.put(self.url, data=request_body)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_edit_stock_correct_input(self):
+    def test_edit_stock_correct_input(self) -> None:
+        """Test put request method for editing stock with correct input."""
         request_body: Dict[str, int] = {"machine": self.machine_1.id, "product": self.product_1.id, "amount": 100}
 
         response = self.client.put(self.url, data=request_body)
@@ -56,7 +62,8 @@ class TestEditStockView(APITestCase):
         self.assertEqual(response_product, expected_product)
         self.assertEqual(response_machine, expected_machine)
 
-    def test_partially_edit_stock_correct_input(self):
+    def test_partially_edit_stock_correct_input(self) -> None:
+        """Test patch request method for editing stock."""
         request_body: Dict[str, int] = {"product": self.product_1.id}
 
         response = self.client.patch(self.url, data=request_body)
@@ -67,7 +74,14 @@ class TestEditStockView(APITestCase):
         self.assertEqual(int(response.data["id"]), self.stock_1.id)
         self.assertEqual(response_product, expected_product)
 
-    def test_edit_stock_duplicate_machine_or_product(self):
+    def test_edit_stock_duplicate_machine_or_product(self) -> None:
+        """Test editing stock with duplicate machine and product key pair."""
         request_body: Dict[str, int] = {"machine": self.stock_2.machine.id, "product": self.stock_2.product.id}
         response = self.client.put(self.url, data=request_body)
         self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def test_edit_stock_not_found(self) -> None:
+        """Test editing non-existing stock."""
+        url = reverse("stock:edit", kwargs={"id": self.stock_2.id + 1})
+        response = self.client.put(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
